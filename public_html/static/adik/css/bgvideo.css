@@ -1,0 +1,38 @@
+.div-no-scrollbar {
+    height: 70vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.div-no-scrollbar video {
+    height: 70vh;
+    width: 100%;
+    position: absolute;/* на всю ширину */
+    top: 0;
+    left: 0;
+    object-fit: cover;/* обрезка
+    не помещающихся фрагментов*/   
+    object-fit: cover;
+    background-color: rgba(86, 67, 67, 0.367);
+    z-index: 1;
+}
+
+.effect {
+    height: 70vh;
+    width: 100%;
+    position: absolute;/* на всю ширину */
+    top: 0;
+    left: 0;
+    object-fit: cover;/* обрезка
+    не помещающихся фрагментов*/   
+    object-fit: cover;
+    background-color: rgba(86, 67, 67, 0.367);
+}
+
+.video-text {
+    color:rgb(127, 217, 255);
+    z-index: 2;
+}
