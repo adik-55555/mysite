@@ -1,0 +1,211 @@
+<!-- нижне=ий блок коментариев то что быдо до 7 урока. Остальное в целях быстроты изучения
+вставлено из хитхаба по ссылке внизу видео путем архивизации -->
+{% load static %} <!--тег load загружает тег static который служит для подключения статических
+внешних файлов -->
+{% load adik_tags %} <!-- для подключения пользовательских тегов -->
+
+
+  <! DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href=
+  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link type="text/css" href="{% static 'adik/css/styles.css' %}" rel="stylesheet" />
+  <link type="text/css" href="{% static 'adik/css/mycss.css' %}" rel="stylesheet" />
+  <link type="text/css" href="{% static 'adik/css/bgvideo.css' %}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html": charset="UTF-8">
+  <link rel="shortout icon" href="{% static 'adik/images/logoza.png' %}" type="image/x-icon"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- {% static 'adik/images/logoza.png' %}- иконка в названии страницыв браузере-->
+  <!-- внесли изменения в пути в 5 ссылках-добавили спереди-->
+
+  <title>{{title}}</title>
+</head>
+<body>
+<div id="wrapper"> <!-- id индикатор в css будет через # -->
+<header id="header"> <!-- шапка контента-->
+{% block mainmenu %}  <!-- блоки заполняем в соответствующих файлах - index.html, about.html и др.-->
+<nav class="navbar navbar-expand-lg bg-secondary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'adik/images/logoza.png' %}"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Переключатель навигации">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="nav-list">
+             
+          <!-- <a href="{% url 'home' %}">Главная</a> -->
+    {% for m in menu %}
+
+          <a href="{% url m.url_name %}">{{m.title}}</a> <!-- смотри views.py-->
+
+    {% endfor %}
+          
+      {% if user.is_authenticated %}
+          <a href="{% url 'users:logout' %}">Выйти</a>
+      {% else %}
+          <a href="{% url 'users:login' %}">Войти</a> | <a href="{% url 'users:register' %}">Регистрация</a>
+      {% endif %}
+              
+{% endblock mainmenu %}
+          </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</nav>
+</header> <!-- конец шапки контента -->                
+  <section><!-- основной контент копируем и вставляем с файла pricing.html-->
+    <div class="div-no-scrollbar"><!-- контейнер для видео-->
+      <video src="{% static 'adik/files/Volna.mp4' %}" type="video/mp4" autoplay muted loop></video>
+      <div class="video-text">
+        <h1>Каменская школа программирования Shelit</h1>
+      </div>
+    </div>
+    
+    <div class="container-fluid mt-4"> <!--m-4  так в bootstrap указываются
+           отступы-margin(готовые стили) m-со всех сторон, my-сверху и снизу,mx-слева
+            и справа,mt-вверх,mb-вниз также p- padding(pt-верх, pb-вниз, px-в стороны,
+            py-верх и вниз) -->
+      <div class="row"><!-- слева 1 доля в центре 8 справа 3(12-8=3)-->
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-8 col-md-12"><!-- займет все 12 долей при сжимании правое 
+                пространство вниз уйдет,  ниже код карусели с bootstrap-->
+          <div class="row">
+
+            <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="d-block w-100"><!-- воспользуемся опять сеткой bootstrap
+                    для того чтобы разделить контейнер на две части в левой картинка
+                    а в правой описание-->
+                    <div class="row"><!-- обязательный класс чтоб расположить в ряд-->
+                      <div class="col-lg-6 col-md-6"> <!-- и на планшетах и на мобильных пополам-->
+                        <img src="{% static 'adik/images/testimonials-1.jpg' %}" class="w-100" alt="Хобби">
+                      </div><!-- конец первой половины-->
+                      <div class="col-lg-6 col-md-6 slide-text">
+                        <p> Я выбрала профессию программиста по нескольким причинам. Во-первых, я всегда была увлечена компьютерами и технологиями. Мне нравится изучать новые программы, создавать интересные проекты и решать сложные задачи с помощью кода.  Во-вторых, программисты сегодня очень востребованы на рынке труда. В современном мире почти все работает на компьютерах и программном обеспечении. Быть программистом означает иметь больше возможностей для работы и развития. </p>
+                      </div><!-- конец второй половины-->
+                    </div>
+
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="d-block w-100"><!-- воспользуемся опять сеткой bootstrap
+                    для того чтобы разделить контейнер на две части в левой картинка
+                    а в правой описание-->
+                    <div class="row"><!-- обязательный класс чтоб расположить в ряд-->
+                      <div class="col-lg-6 col-md-6"> <!-- и на планшетах и на мобильных пополам-->
+                        <img src="{% static 'adik/images/testimonials-2.jpg' %}" class="w-100" alt="Программирование">
+                      </div><!-- конец первой половины-->
+                      <div class="col-lg-6 col-md-6 slide-text">
+                        <p> Программирование — это творческая профессия, можно постоянно создавать что-то новое. Я сам продумываю логику каждой функции, пишу код, структурирую работу, «выкатываю» в прод. Потом тысячи людей используют этот продукт. Прекрасное чувство, ведь за этим всегда стоят изменения к лучшему, оптимизация: люди или целые компании экономят время, силы и деньги.</p>
+                      </div><!-- конец второй половины-->
+                    </div>
+
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="d-block w-100"><!-- воспользуемся опять сеткой bootstrap
+                    для того чтобы разделить контейнер на две части в левой картинка
+                    а в правой описание-->
+                    <div class="row"><!-- обязательный класс чтоб расположить в ряд-->
+                      <div class="col-lg-6 col-md-6"> <!-- и на планшетах и на мобильных пополам-->
+                        <img src="{% static 'adik/images/testimonials-3.jpg' %}" class="w-100" alt="Учеба">
+                      </div><!-- конец первой половины-->
+                      <div class="col-lg-6 col-md-6 slide-text">
+                        <p> Что бы вы ни создавали: приложение, сайт или компьютерную игру – вы здорово тренируете свои творческие способности, прокачиваете свой интеллект и стимулируете выработку нужных нейросвязей в головном мозге.</p>
+                      </div><!-- конец второй половины-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Предыдущий</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Следующий</span>
+              </button>
+            </div>
+            <div class="col-lg-12 col-md-12 text-center mt-4 "><!-- на всех устройствах займет
+              всю ширину родительского контейнера(т.е 8 долей), btn-lg- делает кнопку чуть больше-->
+              <button type="button" class="btn btn-outline-primary btn-lg my-2 ">Узнать больше</button>
+
+            </div>
+            <div class="col-lg-12 col-md-12 text-center mt-4"><!-- на всех устройствах займет
+              всю ширину родительского контейнера(т.е 8 долей), mt-4(margin-top)
+               text-center встроенный bootstrap класс -по центру контейнера-->
+              <p>Нужна помощь?</p>
+            </div>
+            <div class="col-lg-12 col-md-12 text-center"><!-- на всех устройствах займет
+              всю ширину родительского контейнера(т.е 8 долей),
+              call-anim-создали этот класс для анимации картинки-звонок -->
+              <img class="call-anim" style="width: 40px;" src="{% static 'adik/images/Whatsap.png' %}" alt="...">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+          <div class="row px-2">
+            <div class="col-lg-12 sidebar my-4"><!-- правая колонка на 12 долей-->
+              <p>IT-компании делают все, чтобы создать для работников уютную атмосферу, поддержать инициативы, позаботиться об удобстве.<a href="#">Узнать больше</a></p>
+              <!--Lorem- при указании этого слова вставляется любой рандомный текст-->
+            </div>
+            <div class="col-lg-12 sidebar my-4"><!-- правая колонка на 12 долей-->
+              <p>Больше всего свою профессию ценю за свободу, которая она дает. Причем сразу в нескольких аспектах. Первое — это, конечно, свобода в построении карьеры. На рынке много работодателей, поэтому программисты меньше зависят от текущего места работы.<a href="#">Узнать больше</a></p>
+              <!--Lorem- при указании этого слова вставляется любой рандомный текст-->
+            </div>
+            <div class="col-lg-12 sidebar my-4"><!-- правая колонка на 12 долей-->
+              <p>Второе — это свобода передвижения. Работа программистом подходит как для путешествий, совмещенных с удаленной работой, так и для переезда в другой город или страну.<a href="#">Узнать больше</a></p>
+              <!--Lorem- при указании этого слова вставляется любой рандомный текст-->
+            </div>
+            <div class="col-lg-12 sidebar my-4"><!-- правая колонка на 12 долей-->
+              <p>В вашей семье появится свой программист, а мама наконец перестанет ругать за бесконечное сидение за компьютером. Родственники будут гордиться вашей специальностью, а друзья — восхищаться уровнем зарплаты, гибкими условиями труда и спрашивать, каково быть программистом.<a
+                  href="#">Узнать больше</a></p>
+              <!--Lorem- при указании этого слова вставляется любой рандомный текст-->
+            </div>
+
+          </div>
+        </div>
+      
+      </div>
+    </div>
+
+
+  </section>
+  <footer class="mt-4"><!-- подвал -->
+    <div class="container-fluid">
+      <div class="row"><!-- еще три контейнера т.к разбиваем подвал на три части в строку-->
+        <div class="col-lg-4 col-md-12 footer-text text-center">
+          <p>All Rights Reserved 2025</p>
+        </div>
+        <div class="col-lg-4 col-md-12 footer-text text-center"><!--text-center- встроенный класс
+          в bootstrap-размещает текст по центру занимаемого контейнера-->
+          <p>Contacts<br>Shelit<br>Out Team</p>
+
+        </div><!--col-md-12"-для телефонов чтоб все в ряд -->
+        <div class="col-lg-4 col-md-12 media-links">
+          <!--media-links-селектор для указания стилей(по центру все иконки) -->
+          <!--margin-inline: 1em;-для того чтоб не прилипали иконки друг к другу -->
+          <img style="width: 40px; margin-inline: 1em;" src="{% static 'adik/images/youtube.png' %}" alt="...">
+          <img style="width: 40px; margin-inline: 1em;" src="{% static 'adik/images/telegram.png' %}" alt="...">
+          <img style="width: 40px; margin-inline: 1em;" src="{% static 'adik/images/vk.png' %}" alt="...">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

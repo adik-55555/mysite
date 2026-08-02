@@ -1,0 +1,14 @@
+{% extends 'adik/base.html' %}
+ 
+{% block content %}
+<h1>{{post.title}}</h1>
+ 
+{% if post.photo %}
+<!--<p ><img class="img-article-left" src="{{post.photo.url}}"></p> фотография статьи
+{% endif %} -->
+<p><a href="{{post.photo.url}}" target="_blank"><img class="img-article-left" src="{{post.photo.url}}" width="258" height="146" /></a></p> <!-- при раскрытии поста и нажатии на нее открывается в новом окне-->
+<!--<p><img class="img-article-left" src="{{post.photo.url}}"></p>--><!-- картинка  поста --> 
+<!--photo атрибуты(поля) в моделе Uroki) --> 
+ 
+{{post.content|linebreaks}}
+{% endblock %}

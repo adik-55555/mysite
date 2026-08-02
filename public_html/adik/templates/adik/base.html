@@ -1,0 +1,157 @@
+  <!-- нижне=ий блок коментариев то что быдо до 7 урока. Остальное в целях быстроты изучения
+вставлено из хитхаба по ссылке внизу видео путем архивизации -->
+{% load static %} <!--тег load загружает тег static который служит для подключения статических
+внешних файлов -->
+{% load adik_tags %} <!-- для подключения пользовательских тегов django (с файла adik_tags)-->
+
+
+<! DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href=
+  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link type="text/css" href="{% static 'adik/css/styles.css' %}" rel="stylesheet" />
+  <link type="text/css" href="{% static 'adik/css/mycss.css' %}" rel="stylesheet" />
+  <link type="text/css" href="{% static 'adik/css/bgvideo.css' %}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html": charset="UTF-8">
+  <link rel="shortout icon" href="{% static 'adik/images/logoza.png' %}" type="image/x-icon"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- {% static 'adik/images/logoza.png' %}- иконка в названии страницыв браузере-->
+  <!-- внесли изменения в пути в 5 ссылках-добавили спереди-->
+ 
+  <title>{{title}}</title>
+</head>
+<body>
+<div id="wrapper"> <!-- id индикатор в css будет через # -->
+<header id="header"> <!-- шапка контента-->
+{% block mainmenu %}  <!-- блоки заполняем в соответствующих файлах - index.html, about.html и др.-->
+<nav class="navbar navbar-expand-lg bg-secondary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'adik/images/logoza.png' %}"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Переключатель навигации">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="nav-list">
+             
+          <!-- <a href="{% url 'home' %}">Главная</a> -->
+              {% for m in menu %}
+
+              <a href="{% url m.url_name %}">{{m.title}}</a> <!-- смотри views.py-->
+
+              {% endfor %}
+          
+              {% if user.is_authenticated %}
+              <a href="{% url 'users:logout' %}">Выйти</a>
+                  {% else %}
+              <a href="{% url 'users:login' %}">Войти</a> | <a href="{% url 'users:register' %}">Регистрация</a>
+              {% endif %}
+              
+
+          </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</nav>
+{% endblock mainmenu %}
+</header> <!-- конец шапки контента -->
+<!-- тело контента-->
+  <div id="container">
+    <div class="container-fluid mt-4"> <!--m-4  так в bootstrap указываются
+           отступы-margin(готовые стили) m-со всех сторон, my-сверху и снизу,mx-слева
+            и справа,mt-вверх,mb-вниз также p- padding(pt-верх, pb-вниз, px-в стороны,
+            py-верх и вниз) -->
+      <div class="row"><!-- слева 1 доля в центре 8 справа 3(12-8-1=3)-->
+        
+        <div class="col-lg-2"> <!-- сайдбар -->          
+         
+        <ul id="leftchapters">
+                   <!--<li class="selected">Все категории</li> -->
+                   <li><a href="{% url 'home' %}">Все категории</a></li>
+ 
+                   {% show_categories %}
+                   
+                            
+                   <li><a class="share-yt" href="https://proproprogs.ru/">литература</a></li> 
+                   
+                   
+         </ul>                
+        
+        <!-- <li class="selected">Все категории</li>
+        <li><a href="#">html</a> </li>
+        <li><a href="#">css</a> </li>
+        <li><a href="#">python</a> </li>                 
+        <li><a class="share-yt" href="https://proproprogs.ru/">литература</a></li> -->
+         
+          
+
+ <!-- Конец Sidebara -->
+        </div>
+
+<!-- Блок основного контента -->
+        <div class="col-lg-10 col-md-12"><!-- займет все 12 долей при сжимании правое 
+                пространство вниз уйдет,  ниже код карусели с bootstrap-->   
+          
+          
+{% block content %}
+
+{% endblock %}
+
+{% block navigation %} <!-- блок навигации из класса представления ListView
+{% endblock %}
+          
+          <nav class="list-pages">
+              <ul>
+        {% for p in posts.paginator.page_range %}
+              {% if posts.number == p %}
+                 <li class="page-num page-num-selected">{{ p }}</li>
+                   {% else %}
+                      <li class="page-num">
+                     <a href="?page={{ p }}">{{ p }}</a>
+                     </li>
+              {% endif %}
+        {% endfor %}
+              </ul>
+          </nav> -->         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  Конец блока контента -->
+        
+<!-- Footer -->
+  <footer class="mt-4"><!-- подвал -->
+     <div class="container-fluid">
+       <div class="row"><!-- еще три контейнера т.к разбиваем подвал на три части в строку-->
+         <div class="col-lg-4 col-md-12 footer-text text-center">
+           <p>All Rights Reserved 2025</p>
+         </div>
+         <div class="col-lg-4 col-md-12 footer-text text-center"><!--text-center- встроенный класс
+          в bootstrap-размещает текст по центру занимаемого контейнера-->
+           <p>Contacts<br>Shelit<br>School</p>
+
+         </div><!--col-md-12"-для телефонов чтоб все в ряд -->
+         <div class="col-lg-4 col-md-12 media-links">
+          <!--media-links-селектор для указания стилей(по центру все иконки) -->
+          <!--margin-inline: 1em;-для того чтоб не прилипали иконки друг к другу -->
+           <img style="width: 40px; margin-inline: 1em;" src="{% static 'adik/images/youtube.png' %}" alt="...">
+           <img style="width: 40px; margin-inline: 1em;" src="{% static 'adik/images/telegram.png' %}" alt="...">
+           <img style="width: 40px; margin-inline: 1em;" src="{% static 'adik/images/vk.png' %}" alt="...">
+         </div>
+       </div>
+     </div>
+   </footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+</body>
+</html>

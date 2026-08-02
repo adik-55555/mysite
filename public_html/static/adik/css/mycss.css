@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+}
+html {
+	height: 100%;
+}
+header, nav, section, article, aside, footer {
+	display: block;
+}
+
+#wrapper {
+	
+	margin: 0 auto;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%; 
+	
+}
+
+body {
+    height: 100%;
+    font-family: "Michroma", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background: #d0d3d5c7 0%;
+
+}
+#header {
+	height: 60px;
+	
+}
+
+#content {
+	padding: 100px;
+	
+	
+}
+#footer {
+	width: 1000px;
+	margin: -100px auto 0;
+	height: 100px;
+	position: relative;
+	
+}
+p { /* общий для всех параграфов. если
+     надо смениться нижними атрибутами*/ 
+    color:darkolivegreen;
+}
+
+a {
+	color: #0059b2; /* ссылки в навбаре слева */
+	text-decoration: none;
+}
+
+a:hover {
+	color: #CC0000;
+	text-decoration: underline;
+    
+}
+
+.nav-list { /* главное меню */
+    display: flex;
+}
+.nav-list a { /* ссылки главного меню */
+    display: block;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    color: aquamarine;
+    text-decoration: none;
+
+}
+
+
+
+
+
+
+.navbar-brand img {
+    width: 75px;
+    
+}
+.navbar-toggler {
+    background-color: rgb(169, 180, 176);
+
+}
+
+
+
+.card-img-top {
+    height: 300px;/*выравниваем 
+    картинки по вертикали*/
+} 
+
+.sidebar {
+    color: rgb(10, 138, 95);
+    background: linear-gradient(270deg, #ff0000 0%, #8080ff 42%, #ffffff 100%);
+}
+.card {
+    background: linear-gradient(270deg, #ff0000 0%, #8080ff 42%, #ffffff 100%);
+    color: rgb(10, 138, 95); 
+}
+.card a{
+   text-decoration: none;
+   color: rgb(10, 138, 95);  
+}
+.clear {clear: both;}
+
+.slide-text, 
+.footer-text
+ {
+    color: rgb(10, 138, 95);
+    margin: auto auto;/* по центру текст */
+}
+footer,
+.btn-outline-primary {
+   background: linear-gradient(0deg, #b0bfc8 0%, #dfe1de 42%, #eae7e7 100%);
+     
+}
+.media-links {
+    display: flex; /*переводим в flex*/
+    justify-content: center;
+    align-items: center;
+}
+.call-anim {/* вставили первый код с сайта https://webcode.tools/css-generator/
+    keyframe-animation*/
+    animation: myAnim 2s ease 0s 1 normal forwards;
+}
+@keyframes myAnim { /* myAnim- стиль указанный в верхних скобках*/
+	0%,
+	50%,
+	100% {
+		opacity: 1;
+	}
+
+	25%,
+	75% {
+		opacity: 0;
+	}
+}
+@media (max-width: 1000px) {
+    .carousel-indicators {
+        display: none;
+    }
+   
+}

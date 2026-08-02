@@ -1,0 +1,15 @@
+{% extends 'adik/base.html' %}
+
+{% block content %}
+
+<h1>Обратная связь</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }} <!-- если такая запись то отоборажается в несколько строк (если {{ form }}то расплывается-->
+    <input type="submit">
+</form>
+
+
+
+{% endblock %}
